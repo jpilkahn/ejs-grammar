@@ -6,12 +6,16 @@
 	"license": "MIT",
 	"icon": "assets/icon.png",
 	"publisher": "DigitalBrainstem",
-	"author": {
-		"name": "Derek Thomas",
-		"email": "Derek@digitalbrainstem.com"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Digitalbrainstem/ejs-grammar.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Digitalbrainstem/ejs-grammar/issues",
+		"email": "help@digitalbrainstem.com"
 	},
 	"engines": {
-		"vscode": "^0.10.x"
+		"vscode": "^1.18.x"
 	},
 	"categories": [
 		"Programming Languages"
@@ -21,26 +25,46 @@
 		"embedded javascript",
 		"syntax highlighting"
 	],
+	"activationEvents": [
+		"onLanguage:ejs"
+	],
+	"main": "./out/src/extension",
 	"contributes": {
+		"languages": [
+			{
+				"id": "ejs",
+				"extensions": [
+					".ejs",
+					".html.ejs"
+				],
+				"aliases": [
+					"Embedded Javascript",
+					"ejs"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
 		"grammars": [
 			{
+				"language": "ejs",
 				"scopeName": "text.html.ejs",
 				"path": "./syntaxes/ejs.json",
-				"injectTo": [
-					"text.html"
-				],
 				"embeddedLanguages": {
-					"meta.embedded.block.ejs": "ejs",
-					"meta.embedded.block.javascript": "source.js"
+					"section.embedded.source.ejs": "ejs"
 				}
 			}
 		],
-		"snippets": [
-			{
-				"language": "html",
-				"path": "./snippets/snippets.json"
+		"configuration": {
+			"title": "EJS support configuration",
+			"properties": {
+				"javascript-ejs-support.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Maximum number of problems reported"
+				}
 			}
-		],
+		},
 		"configurationDefaults": {
 			"files.associations": {
 				"*.ejs": "html"
@@ -50,9 +74,10 @@
 			}
 		}
 	},
-	"bugs": {
-		"url": "https://github.com/Digitalbrainstem/ejs-grammar/issues",
-		"email": "help@digitalbrainstem.com"
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"update-grammar": "node ../../build/npm/update-grammar.js grammars/ejs.json ./syntaxes/ejs.json"
 	},
 	"repository": {
 		"type": "git",
@@ -62,5 +87,14 @@
 		"id": "9cd87837-c82a-4817-9b79-1c84775aa158",
 		"publisherId": "8a82c29a-f974-4692-be63-35a118c52919",
 		"publisherDisplayName": "DigitalBrainstem"
+	},
+	"dependencies": {
+		"vscode": "^1.1.16",
+		"vscode-languageclient": "^3.5.0",
+		"vscode-languageserver": "^4.1.2"
+	},
+	"devDependencies": {
+		"@types/node": "^10.0.0",
+		"typescript": "^2.8.3"
 	}
 }
