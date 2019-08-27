@@ -100,9 +100,9 @@
 					"include":"text.html.ejs"
 				}
 			]
-		},		
+		},
 		"tag-ejs-single-line": {
-			
+
 			"name": "meta.tag.metadata.script.ejs",
 			"begin":"(<[%?](?:(?!php))[%_=-]?)(?!(\\s*\\*\/))(((?!([_-]?[%?]>)).)+)(?=([_-]?[%?]>))",
 			"beginCaptures": {
