@@ -25,6 +25,9 @@
 		"embedded javascript",
 		"syntax highlighting"
 	],
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./"
+	},
 	"activationEvents": [
 		"onLanguage:ejs"
 	],
@@ -78,7 +81,7 @@
 			"emmet.includeLanguages": {
 				"ejs": "html"
 			}
-		}
+		},
 		"commands": [
 			{
 				"command": "extension.sayHello",
@@ -86,27 +89,19 @@
 			}
 		]
 	},
-	"scripts": {
-		"vscode:prepublish": "tsc -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"update-grammar": "node ../../build/npm/update-grammar.js grammars/ejs.json ./syntaxes/ejs.json"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Digitalbrainstem/ejs-grammar.git"
-	},
 	"__metadata": {
 		"id": "9cd87837-c82a-4817-9b79-1c84775aa158",
 		"publisherId": "8a82c29a-f974-4692-be63-35a118c52919",
 		"publisherDisplayName": "DigitalBrainstem"
 	},
 	"dependencies": {
-		"vscode": "^1.1.16",
 		"vscode-languageclient": "^3.5.0",
 		"vscode-languageserver": "^4.1.2"
 	},
 	"devDependencies": {
 		"@types/node": "^10.0.0",
-		"typescript": "^2.8.3"
+		"@types/vscode": "1.18.x",
+		"typescript": "^3.5.3",
+		"vscode-test": "^1.2.0"
 	}
 }
