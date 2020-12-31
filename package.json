@@ -18,6 +18,7 @@
 	],
 	"keywords": [
 		"EJS",
+		"Eta",
 		"embedded javascript",
 		"syntax highlighting"
 	],
@@ -33,6 +34,17 @@
 					"meta.embedded.block.ejs": "ejs",
 					"meta.embedded.block.javascript": "source.js"
 				}
+			},
+			{
+				"scopeName": "text.html.eta",
+				"path": "./syntaxes/ejs.json",
+				"injectTo": [
+					"text.html"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.block.eta": "eta",
+					"meta.embedded.block.javascript": "source.js"
+				}
 			}
 		],
 		"snippets": [
@@ -43,10 +55,12 @@
 		],
 		"configurationDefaults": {
 			"files.associations": {
-				"*.ejs": "html"
+				"*.ejs": "html",
+				"*.eta": "html"
 			},
 			"emmet.includeLanguages": {
-				"ejs": "html"
+				"ejs": "html",
+				"eta": "html"
 			}
 		}
 	},
