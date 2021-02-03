@@ -1,11 +1,13 @@
+<
 {
-	"name": "Embedded Javascript",
-	"scopeName": "text.html.ejs",
+	"name": "<%= it.engine.name %>",
+	"scopeName": "text.html.<%= it.engine.id %>",
 	"injectionSelector": "L:text.html",
-	"patterns": [
+	"patterns": [<% if (it.prefix.comment) { -%>
 		{
 			"include": "#tag-block-comment"
 		},
+<% } -%>
 		{
 			"include": "#tag-single-line-section-comment"
 		},
@@ -13,42 +15,43 @@
 			"include":"#tag-section-comment"
 		},
 		{
-			"include":"#tag-ejs-single-line"
+			"include":"#tag-<%= it.engine.id %>-single-line"
 		},
 		{
-			"include":"#tag-ejs-multi-line"
+			"include":"#tag-<%= it.engine.id %>-multi-line"
 		}
 	],
-	"repository": {
+	"repository": {<% if (it.prefix.comment) { -%>
 		"tag-block-comment": {
-			"begin": "<[%?]#",
+			"begin": "<%= it.tag.open.plain %><%= it.prefix.comment %>",
 			"beginCaptures": {
 				"0": {
-					"name": "punctuation.definition.comment.ejs"
+					"name": "punctuation.definition.comment.<%= it.engine.id %>"
 				}
 			},
-			"end": "[%?]>",
+			"end": "<%= it.tag.close %>",
 			"endCaptures": {
 				"0": {
-					"name": "punctuation.definition.comment.ejs"
+					"name": "punctuation.definition.comment.<%= it.engine.id %>"
 				}
 			},
-			"name": "comment.block.ejs"
+			"name": "comment.block.<%= it.engine.id %>"
 		},
+		<% } %>
 		"tag-single-line-section-comment": {
-			"begin": "(<[%?](?:(?!php))[%_=-]?)\\s*((\/\\*)(.*)(\\*\/))(?=(\\s*([%?]>)))",
+			"begin": "(<%= it.tag.open.withPrefix %>)\\s*((\/\\*)(.*)(\\*\/))(?=(\\s*(<%= it.tag.close.withWsControl %>)))",
 			"captures": {
 				"1": {
 					"name": "keyword.operator.relational.js"
 				},
 				"3": {
-					"name": "punctuation.definition.comment.ejs"
+					"name": "punctuation.definition.comment.<%= it.engine.id %>"
 				},
 				"5": {
-					"name": "punctuation.definition.comment.ejs"
+					"name": "punctuation.definition.comment.<%= it.engine.id %>"
 				},
 				"2": {
-					"name": "comment.block.ejs"
+					"name": "comment.block.<%= it.engine.id %>"
 				}
 			},
 			"end": "([%?]>)",
@@ -57,11 +60,11 @@
 					"name": "keyword.operator.relational.js"
 				}
 			},
-			"contentName": "comment.block.ejs",
-			"name":"meta.block.single.comment.ejs"
+			"contentName": "comment.block.<%= it.engine.id %>",
+			"name":"meta.block.single.comment.<%= it.engine.id %>"
 		},
 		"tag-section-comment": {
-			"name":"comment.block.ejs",
+			"name":"comment.block.<%= it.engine.id %>",
 			"begin":"(<[%?](?:(?!php)))\\s*((?=(\/\\*)))",
 			"beginCaptures": {
 				"1": {
@@ -71,7 +74,7 @@
 			"end": "(\\*\/)\\s*([%?]>)",
 			"endCaptures": {
 				"1": {
-					"name": "punctuation.definition.comment.ejs"
+					"name": "punctuation.definition.comment.<%= it.engine.id %>"
 				},
 				"2": {
 					"name": "keyword.operator.relational.js"
@@ -79,7 +82,7 @@
 			},
 			"patterns":[
 				{
-					"name":"ejs-end-tag",
+					"name":"<%= it.engine.id %>-end-tag",
 					"match":"([%?]>)",
 					"captures":{
 						"1":{
@@ -88,7 +91,7 @@
 					}
 				},
 				{
-					"name":"ejs-begin-tag",
+					"name":"<%= it.engine.id %>-begin-tag",
 					"match":"(<[%?](?:(?!php)))",
 					"captures":{
 						"1":{
@@ -97,13 +100,12 @@
 					}
 				},
 				{
-					"include":"text.html.ejs"
+					"include":"text.html.<%= it.engine.id %>"
 				}
 			]
-		},		
-		"tag-ejs-single-line": {
-			
-			"name": "meta.tag.metadata.script.ejs",
+		},
+		"tag-<%= it.engine.id %>-single-line": {
+			"name": "meta.tag.metadata.script.<%= it.engine.id %>",
 			"begin":"(<[%?](?:(?!php))[%_=-]?)(?!(\\s*\\*\/))(((?!([_-]?[%?]>)).)+)(?=([_-]?[%?]>))",
 			"beginCaptures": {
 				"0": {
@@ -114,7 +116,7 @@
 					"name": "keyword.operator.relational.js"
 				},
 				"3": {
-					"name": "meta.embedded.ejs",
+					"name": "meta.embedded.<%= it.engine.id %>",
 					"contentName": "source.js",
 					"patterns":[
 						{
@@ -133,16 +135,16 @@
 				}
 			}
 		},
-		"tag-ejs-multi-line": {
+		"tag-<%= it.engine.id %>-multi-line": {
 			"contentName":"source.js",
-			"name": "meta.block.ejs",
+			"name": "meta.block.<%= it.engine.id %>",
 			"begin":"(<[%?](?:(?!php))[%_=-]?)(?!(\\s*\\*\/))",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.operator.relational.js"
 				},
 				"3": {
-					"name": "meta.embedded.ejs",
+					"name": "meta.embedded.<%= it.engine.id %>",
 					"contentName": "source.js",
 					"patterns":[
 						{

@@ -1,0 +1,33 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "text.html.<%= it.engine.id %>.override-js",
+	"injectionSelector": "L:text.html.<%= it.engine.id %> (* - meta.embedded.block.html) meta.block.js - (comment.block, text.html.<%= it.engine.id %>.override-js)",
+	"patterns": [
+		{
+			"begin": "<%= it.closingTagWithWsControl %>",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.tag.end.<%= it.engine.id %>"
+				},
+				"1": {
+					"name": "text.html.<%= it.engine.id %>.override-js"
+				}
+			},
+			"end": "<%= it.openingTagWithWsControl %>",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.tag.begin.<%= it.engine.id %>"
+				},
+				"1": {
+					"name": "text.html.<%= it.engine.id %>.override-js"
+				}
+			},
+			"contentName": "text.html.<%= it.engine.id %>.override-js",
+			"patterns": [
+				{
+					"include": "text.html.<%= it.engine.id %>"
+				}
+			]
+		}
+	]
+}

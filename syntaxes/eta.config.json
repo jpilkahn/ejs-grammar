@@ -1,0 +1,25 @@
+{
+    "delimiter": {
+        "common": "[]",
+        "close": ">",
+        "open": "<"
+    },
+    "engine": {
+        "id": "eta",
+        "name": ""
+    },
+    "prefix": {
+        "comment": "#",
+        "escaped": "=",
+        "literal": "%",
+        "raw": "-"
+    },
+    "supports": {
+        "leftNewlineTrim": true,
+        "whitespaceBeforePrefix": true
+    },
+    "ws": {
+        "newline": "-",
+        "whitespace": "_"
+    }
+}

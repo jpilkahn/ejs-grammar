@@ -1,0 +1,34 @@
+<%
+
+const negLookAheadPhp = '(?:(?!php))'
+
+const closingTag: `${it.delimiter.tag}${it.delimiter.close}`
+const openingTag: `${it.delimiter.open}${it.delimiter.tag}`
+
+const openingNewlineTrim = it.supports.leftNewlineTrim ? it.ws.newline : ''
+
+const closingWsControl = `${it.ws.whitespace}${it.ws.newline}`
+const openingWsControl = `${it.ws.whitespace}${openingNewlineTrim}`
+
+const prefixes = `${it.prefix.escaped}${it.prefix.literal}${it.prefix.raw}`
+
+const it = {
+    ...it,
+    tag: {
+        close: {
+            plain: closingTag,
+            withWsControl: `[${closingWsControl}]?${closingTag}`
+        },
+        open: {
+            plain: openingTag,
+            withPrefix: `${openingTag}${negLookAheadPhp}${
+                it.supports.whitespaceBeforePrefix
+                    ? `[${openingWsControl}]?(?:(\s*[${prefixes}]))?`
+                    : `[${openingWsControl}${prefixes}]?`
+            }`,
+            withWsControl: `${openingTag}${negLookAheadPhp}[${openingWsControl}]?`
+        }
+    }
+}
+
+%>

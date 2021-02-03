@@ -1,0 +1,25 @@
+{
+    "delimiter": {
+        "common": "%*",
+        "close": ">",
+        "open": "<"
+    },
+    "engine": {
+        "id": "ejs",
+        "name": "Embedded JavaScript"
+    },
+    "prefix": {
+        "comment": "#",
+        "escaped": "=",
+        "literal": "%",
+        "raw": "-"
+    },
+    "supports": {
+        "leftNewlineTrim": false,
+        "whitespaceBeforePrefix": false
+    },
+    "ws": {
+        "newline": "-",
+        "whitespace": "_"
+    }
+}
